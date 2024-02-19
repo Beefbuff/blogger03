@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  each blog in blogs
+    .card.text-success.bg-dark.mb-3(style="width: 30%;")
+      .card-body
+        h5.card-title #{blog.title}
+        p.card-text #{blog.text}
+        a.btn.btn-success.btn-sm.btn-outline-dark(href="/delete" style="float:right") Delete
+        a.btn.btn-success.btn-sm.btn-outline-dark(href="/edit" style="float:right") Edit
+
+  
+    

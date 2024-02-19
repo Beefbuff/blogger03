@@ -1,0 +1,22 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100vh;
+  background-color: #198754;
+}
+
+a {
+  color: #00B7FF;
+}
+
+p {
+  padding: 5%;
+  font-size: 32px;
+}
+
+.card {
+  margin: 0 auto; 
+  float: none; 
+  margin-left: 5%;      
+  margin-right: 18%;
+  margin-bottom: 10px;
+}
