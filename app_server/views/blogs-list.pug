@@ -6,8 +6,17 @@ block content
       .card-body
         h5.card-title #{blog.title}
         p.card-text #{blog.text}
-        a.btn.btn-success.btn-sm.btn-outline-dark(href="/delete" style="float:right") Delete
-        a.btn.btn-success.btn-sm.btn-outline-dark(href="/edit" style="float:right") Edit
 
-  
-    
+        ul.nav.justify-content-end.nav-pills.card-header-pills.text-primary
+          li.nav-item
+          a.nav-link(href='/edit')
+            i.fas.fa-edit 
+          li.nav-item
+          a.nav-link(href='/delete')
+            i.fas.fa-trash-alt
+
+
+
+      script(src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js")
+
+
