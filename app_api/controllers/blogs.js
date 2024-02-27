@@ -15,7 +15,7 @@ module.exports.blogsList = function (req, res) {
     console.log('Getting Blog list');
     Blogsmodel
         .find()
-        .exec=(function(err, results) {
+        .exec(function(err, results) {
           if (!results) {
             sendJSONresponse(res, 404, {
               "message": "no blogs found"
@@ -33,18 +33,14 @@ module.exports.blogsList = function (req, res) {
   
   var buildBlogList = function(req, res, results) {
     var blogs = [];
-    console.log("before foreach");
-    results.forEach(function(obj) {
-      console.log("in foreach");
+    results.forEach(function(doc) {
       blogs.push({
-        _id: obj._id,
-        title: obj.title,
-        text: obj.text,
-        createdOn: obj.createdOn
+        _id: doc._id,
+        title: doc.title,
+        text: doc.text,
+        createdOn: doc.createdOn
       });
-      console.log("after document add");
     });
-    console.log("before return");
     return blogs;
 };
 
