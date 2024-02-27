@@ -1,9 +1,5 @@
 var mongoose = require('mongoose');
 var Blogsmodel = mongoose.model('blog');
-var request = require('request');
-var apiOptions = {
-  server : "http://localhost:3000"  // Change as needed
-};
 
 var sendJSONresponse = function(res, status, content) {
     res.status(status);
@@ -56,7 +52,7 @@ module.exports.blogsCreate = function (req, res) {
             console.log(err);
             sendJSONresponse(res, 400, err);
          } else {
-            console.log(location);
+            console.log(blog);
             sendJSONresponse(res, 201, blog);
          }
        }
@@ -95,11 +91,11 @@ module.exports.blogsReadOne = function(req, res) {
 
 //PUT update a blog by id
 module.exports.blogsUpdateOne = function (req, res) {
-    console.log("Updating a blog entry with id of " + req.params.id);
+    console.log("Updating a blog entry with id of " + req.params.ObjectId);
     console.log(req.body);
     Blogsmodel
   	  .findOneAndUpdate(
-	     { _id: req.params.id },
+	     { _id: req.params.ObjectId },
  	     { $set: {"title": req.body.title, "text": req.body.text}},
 	     function(err, response) {
 	         if (err) {
@@ -113,10 +109,10 @@ module.exports.blogsUpdateOne = function (req, res) {
 
 //DELETE a blog by id
 module.exports.blogsDeleteOne = function (req, res) {
-    console.log("Deleting blog entry with id of " + req.params.id);
+    console.log("Deleting blog entry with id of " + req.params.ObjectId);
     console.log(req.body);
     Blogsmodel
-        .findByIdAndRemove(req.params.id)
+        .findByIdAndRemove(req.params.ObjectId)
         .exec (
             function(err, response) {
                 if (err) {
