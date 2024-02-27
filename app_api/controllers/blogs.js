@@ -11,7 +11,7 @@ module.exports.blogsList = function (req, res) {
     console.log('Getting Blog list');
     Blogs
         .find()
-        .exec(function(err, results) {
+        .exec=(function(err, results) {
           if (!results) {
             sendJSONresponse(res, 404, {
               "message": "no blogs found"
