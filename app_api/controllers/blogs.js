@@ -6,8 +6,37 @@ var sendJSONresponse = function(res, status, content) {
     res.json(content);
   };
 
+//GET a list of all blogs
 module.exports.blogsList = function (req, res) {
-    sendJSONresponse(res,200,{"status": "success"});
+    console.log('Getting Blog list');
+    Loc
+        .find()
+        .exec(function(err, results) {
+          if (!results) {
+            sendJSONresponse(res, 404, {
+              "message": "no blogs found"
+            });
+            return;
+          } else if (err) {
+            console.log(err);
+            sendJSONresponse(res, 404, err);
+            return;
+          }
+          console.log(results);
+          sendJSONresponse(res, 200, buildBlogList(req, res, results));
+        }); 
+  };
+  
+  var buildBlogList = function(req, res, results) {
+    var blogs = [];
+    results.forEach(function(obj) {
+      blogs.push({
+        title: obj.title,
+        text: obj.text,
+        _id: obj._id
+      });
+    });
+    return blogs;
 };
 
 module.exports.blogsCreate = function (req, res) {
