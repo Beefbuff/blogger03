@@ -9,7 +9,7 @@ var sendJSONresponse = function(res, status, content) {
 //GET a list of all blogs
 module.exports.blogsList = function (req, res) {
     console.log('Getting Blog list');
-    Loc
+    Blogs
         .find()
         .exec(function(err, results) {
           if (!results) {
@@ -39,8 +39,23 @@ module.exports.blogsList = function (req, res) {
     return blogs;
 };
 
+// POST a new blog
 module.exports.blogsCreate = function (req, res) {
-    sendJSONresponse(res,200,{"status": "success"});
+    console.log(req.body);
+    Blogs
+     .create({
+        title: req.body.title,
+        text: req.body.text,
+       }, function(err, blog) {
+         if (err) {
+            console.log(err);
+            sendJSONresponse(res, 400, err);
+         } else {
+            console.log(location);
+            sendJSONresponse(res, 201, blog);
+         }
+       }
+     );
 };
 
 //Get a blog by ID
