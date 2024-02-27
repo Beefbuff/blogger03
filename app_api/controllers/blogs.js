@@ -6,12 +6,22 @@ var sendJSONresponse = function(res, status, content) {
     res.json(content);
   };
 
-module.exports.blogsList = function (req, res) {};
+module.exports.blogsList = function (req, res) {
+    sendJSONresponse(res,200,{"status": "success"});
+};
 
-module.exports.blogsCreate = function (req, res) {};
+module.exports.blogsCreate = function (req, res) {
+    sendJSONresponse(res,200,{"status": "success"});
+};
 
-module.exports.blogsReadOne = function (req, res) {};
+module.exports.blogsReadOne = function (req, res) {
+    sendJSONresponse(res,200,{"status": "success"});
+};
 
-module.exports.blogsUpdateOne = function (req, res) {};
+module.exports.blogsUpdateOne = function (req, res) {
+    sendJSONresponse(res,200,{"status": "success"});
+};
 
-module.exports.blogsDelete = function (req, res) {};
+module.exports.blogsDelete = function (req, res) {
+    sendJSONresponse(res,200,{"status": "success"});
+};
