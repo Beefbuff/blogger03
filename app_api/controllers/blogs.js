@@ -1,5 +1,9 @@
 var mongoose = require('mongoose');
-var Blogs = mongoose.model('blog');
+var Blogsmodel = mongoose.model('blog');
+var request = require('request');
+var apiOptions = {
+  server : "http://localhost:3000"  // Change as needed
+};
 
 var sendJSONresponse = function(res, status, content) {
     res.status(status);
@@ -9,7 +13,7 @@ var sendJSONresponse = function(res, status, content) {
 //GET a list of all blogs
 module.exports.blogsList = function (req, res) {
     console.log('Getting Blog list');
-    Blogs
+    Blogsmodel
         .find()
         .exec=(function(err, results) {
           if (!results) {
@@ -22,27 +26,32 @@ module.exports.blogsList = function (req, res) {
             sendJSONresponse(res, 404, err);
             return;
           }
-          console.log(results);
+          //console.log(results);
           sendJSONresponse(res, 200, buildBlogList(req, res, results));
         }); 
   };
   
   var buildBlogList = function(req, res, results) {
     var blogs = [];
+    console.log("before foreach");
     results.forEach(function(obj) {
+      console.log("in foreach");
       blogs.push({
+        _id: obj._id,
         title: obj.title,
         text: obj.text,
-        _id: obj._id
+        createdOn: obj.createdOn
       });
+      console.log("after document add");
     });
+    console.log("before return");
     return blogs;
 };
 
 // POST a new blog
 module.exports.blogsCreate = function (req, res) {
     console.log(req.body);
-    Blogs
+    Blogsmodel
      .create({
         title: req.body.title,
         text: req.body.text,
@@ -59,13 +68,12 @@ module.exports.blogsCreate = function (req, res) {
 };
 
 //Get a blog by ID
-module.exports.blogsReadOne = function (req, res) {
 
-module.exports.blogsReadOneReadOne = function(req, res) {
+module.exports.blogsReadOne = function(req, res) {
     console.log('Finding Blog', req.params);
-    if (req.params && req.params.blogid) {
-      Blogs
-        .findById(req.params.blogid)
+    if (req.params && req.params.ObjectId) {
+      Blogsmodel
+        .findById(req.params.ObjectId)
         .exec(function(err, blog) {
           if (!blog) {
             sendJSONresponse(res, 404, {
@@ -87,13 +95,13 @@ module.exports.blogsReadOneReadOne = function(req, res) {
       });
     }
   };
-};
+
 
 //PUT update a blog by id
 module.exports.blogsUpdateOne = function (req, res) {
     console.log("Updating a blog entry with id of " + req.params.id);
     console.log(req.body);
-    Blogs
+    Blogsmodel
   	  .findOneAndUpdate(
 	     { _id: req.params.id },
  	     { $set: {"title": req.body.title, "text": req.body.text}},
@@ -111,7 +119,7 @@ module.exports.blogsUpdateOne = function (req, res) {
 module.exports.blogsDeleteOne = function (req, res) {
     console.log("Deleting blog entry with id of " + req.params.id);
     console.log(req.body);
-    Blogs
+    Blogsmodel
         .findByIdAndRemove(req.params.id)
         .exec (
             function(err, response) {

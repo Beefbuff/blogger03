@@ -7,8 +7,8 @@ var ctrlBlogList = require('../controllers/blogs');
 
 router.get('/blogs', ctrlBlogList.blogsList);
 router.post('/blogs',ctrlBlogList.blogsCreate);
-router.get('/edit/_id',ctrlBlogList.blogsReadOne);
-router.put('/edit/_id',ctrlBlogList.blogsUpdateOne);
-router.delete('/delete/_id',ctrlBlogList.blogsDeleteOne);
+router.get('/edit/:ObjectId',ctrlBlogList.blogsReadOne);
+router.put('/edit/:ObjectId',ctrlBlogList.blogsUpdateOne);
+router.delete('/delete/:ObjectId',ctrlBlogList.blogsDeleteOne);
 
 module.exports = router;
