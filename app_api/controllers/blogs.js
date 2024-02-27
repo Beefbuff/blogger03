@@ -107,6 +107,19 @@ module.exports.blogsUpdateOne = function (req, res) {
     );
 };
 
+//DELETE a blog by id
 module.exports.blogsDeleteOne = function (req, res) {
-    sendJSONresponse(res,200,{"status": "success"});
+    console.log("Deleting blog entry with id of " + req.params.id);
+    console.log(req.body);
+    Blogs
+        .findByIdAndRemove(req.params.id)
+        .exec (
+            function(err, response) {
+                if (err) {
+                            sendJSONresponse(res, 404, err);
+                } else {
+                            sendJSONresponse(res, 204, null);
+                }
+            }
+        );
 };
