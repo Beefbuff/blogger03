@@ -62,7 +62,7 @@ module.exports.blogsCreate = function (req, res) {
 module.exports.blogsReadOne = function (req, res) {
 
 module.exports.blogsReadOneReadOne = function(req, res) {
-    console.log('Finding location details', req.params);
+    console.log('Finding Blog', req.params);
     if (req.params && req.params.blogid) {
       Blogs
         .findById(req.params.blogid)
@@ -89,8 +89,22 @@ module.exports.blogsReadOneReadOne = function(req, res) {
   };
 };
 
+//PUT update a blog by id
 module.exports.blogsUpdateOne = function (req, res) {
-    sendJSONresponse(res,200,{"status": "success"});
+    console.log("Updating a blog entry with id of " + req.params.id);
+    console.log(req.body);
+    Blogs
+  	  .findOneAndUpdate(
+	     { _id: req.params.id },
+ 	     { $set: {"title": req.body.title, "text": req.body.text}},
+	     function(err, response) {
+	         if (err) {
+	  	         sendJSONresponse(res, 400, err);
+	         } else {
+		        sendJSONresponse(res, 201, response);
+	        }
+	    }
+    );
 };
 
 module.exports.blogsDeleteOne = function (req, res) {
