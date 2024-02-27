@@ -9,6 +9,6 @@ router.get('/blogs', ctrlBlogList.blogsList);
 router.post('/blogs',ctrlBlogList.blogsCreate);
 router.get('/edit/:blogid',ctrlBlogList.blogsReadOne);
 router.put('/edit/:blogid',ctrlBlogList.blogsUpdateOne);
-router.delete('/delete',ctrlBlogList.blogsDeleteOne);
+router.delete('/delete/:blogid',ctrlBlogList.blogsDeleteOne);
 
 module.exports = router;
