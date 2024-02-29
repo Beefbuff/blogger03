@@ -1,5 +1,19 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title} features coming soon.
+    .card.text-success.bg-dark.mb-3(style="width: 30%;")
+      .card-body
+        h5.card-title #{blogs.title}
+        p.card-text #{blogs.text}
+
+        ul.nav.justify-content-end.nav-pills.card-header-pills.text-primary
+          li.nav-item
+          a.nav-link(href='/list')
+            i.fas.fa-ban  
+          li.nav-item
+          a.nav-link(href='/list')
+            i.fas.fa-trash-alt
+
+
+
+      script(src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js")

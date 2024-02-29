@@ -96,7 +96,7 @@ var renderEditPage = function(req, res, responseBody){
 //Blog Edit Post
 module.exports.editPost = function(req, res){
     var requestOptions, path, postdata;
-    var id = req.params.ObjectId;
+    var id = req.params._id;
     path = '/api/edit/' + id;
 
     postdata = {
@@ -141,7 +141,7 @@ module.exports.delete = function(req, res){
 
 // Render the blog delete page
 var renderDeletePage = function(req, res, responseBody){
-    res.render('blogdelete', {
+    res.render('blogDelete', {
         title: 'Blog Delete',
         pageHeader: {
                 title: 'Blog Delete'
@@ -154,7 +154,7 @@ var renderDeletePage = function(req, res, responseBody){
 // Blog Delete Post
 module.exports.deletePost = function(req, res){
     var requestOptions, path, postdata;
-    var id = req.params.ObjectId;
+    var id = req.params._id;
     path = '/api/delete/' + id;
 
     requestOptions = {
