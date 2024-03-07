@@ -77,7 +77,6 @@ module.exports.blogsReadOne = function(req, res) {
             sendJSONresponse(res, 404, err);
             return;
           }
-          console.log(blog);
           sendJSONresponse(res, 200, blog);
         });
     } else {
@@ -96,7 +95,7 @@ module.exports.blogsUpdateOne = function (req, res) {
     Blogsmodel
   	  .findOneAndUpdate(
 	     { _id: req.params.blogId },
- 	     { $set: {"title": req.body.title, "text": req.body.text}},
+ 	     { $set: {"title": req.body.title, "text": req.body.text}, "createdOn": req.body.createdOn},
 	     function(err, response) {
 	         if (err) {
 	  	         sendJSONresponse(res, 400, err);

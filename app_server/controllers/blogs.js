@@ -44,7 +44,7 @@ module.exports.addPost = function(req, res){
 
     postdata = {
         title: req.body.title,
-        text: req.body.text
+        text: req.body.text,
     }; 
 
     requestOptions = {
@@ -57,7 +57,7 @@ module.exports.addPost = function(req, res){
       requestOptions,
       function(err, response, body) {
          if (response.statusCode === 201) {
-              res.redirect('/blogs-list');
+              res.redirect('/list');
          } else {
               _showError(req, res, response.statusCode);
          } 
@@ -103,7 +103,7 @@ module.exports.editPost = function(req, res){
 
     postdata = {
         title: req.body.title,
-        text: req.body.text
+        text: req.body.text,
     };
 
     requestOptions = {
@@ -127,7 +127,7 @@ module.exports.editPost = function(req, res){
 // Blogs delete
 module.exports.delete = function(req, res){
     var requestOptions, path;
-    path = "/api/delete/" + req.params.blogId;
+    path = "/api/edit/" + req.params.blogId;
     requestOptions = {
         url : apiOptions.server + path,
         method : "GET",
@@ -148,7 +148,7 @@ var renderDeletePage = function(req, res, responseBody){
         pageHeader: {
                 title: 'Blog Delete'
         },
-        blogs: responseBody
+        blog: responseBody
         }
     );
 };
@@ -169,7 +169,7 @@ module.exports.deletePost = function(req, res){
         requestOptions,
         function(err, response, body) {
             if (response.statusCode === 204) {
-                res.redirect('/blogs-list');
+                res.redirect('/list');
             } else {
                 _showError(req, res, response.statusCode);
             }

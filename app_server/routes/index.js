@@ -10,9 +10,16 @@ router.get('/', function(req, res, next) {
 
 router.get('/', ctrlHome.home);
 router.get('/list', ctrlBlogList.list);
+
 router.get('/add',ctrlBlogList.add);
+router.post('/add',ctrlBlogList.addPost);
+
 router.get('/edit/:blogId',ctrlBlogList.edit);
-router.get('/delete/:blogId',ctrlBlogList.delete);
 router.post('/edit/:blogId',ctrlBlogList.editPost);
+
+router.get('/delete/:blogId',ctrlBlogList.delete);
+router.post('/delete/:blogId',ctrlBlogList.deletePost);
+
+
 
 module.exports = router;

@@ -3,22 +3,12 @@ extends layout
 block content
     .card.text-success.bg-dark.mb-3(style="width: 30%;")
       .card-body
-        form(action=`/edit/${blog._id}` method='post')
-          input(type='text' name='title' placeholder='title' value = blog.title)
+        form(method="post" action=`/edit/${blog._id}` id='editBlog')
+          h1(style= "font-size: 16px;text-decoration: underline;") Blog Title
+          textarea.text-success(type="text" name="title" placeholder="" style=" width: 80%;") #{blog.title}
+          h2(style= "font-size: 16px;text-decoration: underline;") Blog Text 
+          textarea.text-success(name="text" placeholder="" style="width: 80%;") #{blog.text}
           br
-          textarea(name='text' placeholder='') #{blog.text}
-          br
-          button(type='submit') Submit
-
-
-        ul.nav.justify-content-end.nav-pills.card-header-pills.text-primary
-          li.nav-item
-          a.nav-link(href='/list')
-            i.fas.fa-ban  
-          li.nav-item
-          a.nav-link(href='/list')
-            i.fas.fa-trash-alt
-
-
+        input.btn.btn-success.btn-sm.text-dark(input type="submit" form="editBlog" style="float: right;" value = "Submit Blog")
 
       script(src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js")
