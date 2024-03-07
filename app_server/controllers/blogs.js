@@ -44,7 +44,7 @@ module.exports.addPost = function(req, res){
 
     postdata = {
         title: req.body.title,
-        tecx: req.body.text
+        text: req.body.text
     }; 
 
     requestOptions = {
@@ -68,7 +68,8 @@ module.exports.addPost = function(req, res){
 //Get blog edit page
 module.exports.edit = function(req, res){
     var requestOptions, path;
-    path = "/api/edit/" + req.params.ObjectId;
+    path = "/api/edit/" + req.params.blogId;
+    console.log(path);
     requestOptions = {
         url : apiOptions.server + path,
         method : "GET",
@@ -84,19 +85,20 @@ module.exports.edit = function(req, res){
 
 /* Render the blog edit page */
 var renderEditPage = function(req, res, responseBody){
+    console.log(responseBody);
     res.render('blogEdit', {
         title: 'Edit Blog',
         pageHeader: {
                 title: 'Blog info'
         },
-        blogs: responseBody
+        blog: responseBody
     });
 };
 
 //Blog Edit Post
 module.exports.editPost = function(req, res){
     var requestOptions, path, postdata;
-    var id = req.params._id;
+    var id = req.params.blogId;
     path = '/api/edit/' + id;
 
     postdata = {
@@ -114,7 +116,7 @@ module.exports.editPost = function(req, res){
 	requestOptions,
         function(err, response, body) {
             if (response.statusCode === 201) {
-                res.redirect('/blogs-list');
+                res.redirect('/list');
             } else {
                 _showError(req, res, response.statusCode);
             }
@@ -125,7 +127,7 @@ module.exports.editPost = function(req, res){
 // Blogs delete
 module.exports.delete = function(req, res){
     var requestOptions, path;
-    path = "/api/delete/" + req.params.ObjectId;
+    path = "/api/delete/" + req.params.blogId;
     requestOptions = {
         url : apiOptions.server + path,
         method : "GET",
@@ -154,7 +156,7 @@ var renderDeletePage = function(req, res, responseBody){
 // Blog Delete Post
 module.exports.deletePost = function(req, res){
     var requestOptions, path, postdata;
-    var id = req.params._id;
+    var id = req.params.blogId;
     path = '/api/delete/' + id;
 
     requestOptions = {

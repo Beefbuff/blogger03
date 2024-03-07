@@ -62,10 +62,10 @@ module.exports.blogsCreate = function (req, res) {
 //Get a blog by ID
 
 module.exports.blogsReadOne = function(req, res) {
-    console.log('Finding Blog', req.params);
-    if (req.params && req.params.ObjectId) {
+    console.log('Finding Blog', req.params.blogId);
+    if (req.params && req.params.blogId) {
       Blogsmodel
-        .findById(req.params.ObjectId)
+        .findById(req.params.blogId)
         .exec(function(err, blog) {
           if (!blog) {
             sendJSONresponse(res, 404, {
@@ -91,11 +91,11 @@ module.exports.blogsReadOne = function(req, res) {
 
 //PUT update a blog by id
 module.exports.blogsUpdateOne = function (req, res) {
-    console.log("Updating a blog entry with id of " + req.params.ObjectId);
+    console.log("Updating a blog entry with id of " + req.params.blogId);
     console.log(req.body);
     Blogsmodel
   	  .findOneAndUpdate(
-	     { _id: req.params.ObjectId },
+	     { _id: req.params.blogId },
  	     { $set: {"title": req.body.title, "text": req.body.text}},
 	     function(err, response) {
 	         if (err) {
@@ -109,10 +109,10 @@ module.exports.blogsUpdateOne = function (req, res) {
 
 //DELETE a blog by id
 module.exports.blogsDeleteOne = function (req, res) {
-    console.log("Deleting blog entry with id of " + req.params.ObjectId);
+    console.log("Deleting blog entry with id of " + req.params.blogId);
     console.log(req.body);
     Blogsmodel
-        .findByIdAndRemove(req.params.ObjectId)
+        .findByIdAndRemove(req.params.blogId)
         .exec (
             function(err, response) {
                 if (err) {

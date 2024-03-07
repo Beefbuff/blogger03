@@ -11,7 +11,8 @@ router.get('/', function(req, res, next) {
 router.get('/', ctrlHome.home);
 router.get('/list', ctrlBlogList.list);
 router.get('/add',ctrlBlogList.add);
-router.get('/edit',ctrlBlogList.edit);
-router.get('/delete',ctrlBlogList.delete);
+router.get('/edit/:blogId',ctrlBlogList.edit);
+router.get('/delete/:blogId',ctrlBlogList.delete);
+router.post('/edit/:blogId',ctrlBlogList.editPost);
 
 module.exports = router;
